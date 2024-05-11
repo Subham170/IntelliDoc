@@ -179,6 +179,32 @@ export const logout = async (req, res) => {
   }
 
 
+  // POST route to handle forgot password request
 
+  
+  // Function to send email
+  // async function sendEmail(to, subject, text) {
+  //   const transporter = nodemailer.createTransport({
+  //     service: 'gmail',
+  //     auth: {
+  //       user: 'teamintellidoc@gmail.com', // your email
+  //       pass: 'kkpr aeiv slyu tlya' // your email password
+  //     }
+  //   });
+  
+  //   const mailOptions = {
+  //     from: 'teamintellidoc@gmail.com', // your email
+  //     to: to,
+  //     subject: subject,
+  //     text: text
+  //   };
+     
+  //   try{
+  //     await transporter.sendMail(mailOptions);
+  //   } catch(err){
+  //      console.log(err);
+  //   }
+    
+  // }
 
   

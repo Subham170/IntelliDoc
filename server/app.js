@@ -9,7 +9,7 @@ config();
 import HttpError from "./models/http-error.js";
 import { signup,login,logout,getUsers} from "./controllers/user-controller.js";
 import { IsAuthorized } from "./middlewares/isAuthorized.js";
-
+import { handleFileUpload } from "./middlewares/multer.js";
 
 import { changePassword, sendOTP, verifyOTP } from "./controllers/changePassword.js";
 
@@ -24,11 +24,11 @@ app.use(cookieParser());
 
 app.post("/signup",signup);
 app.post("/login",login);
-
+// app.post("/forgotPassword",forgotPassword);
 app.get("/logout",logout);
 app.get("/getuser",IsAuthorized, getUsers);
 
-
+app.post("/handleFileUpload", handleFileUpload);
 
 app.post("/sendOTP",sendOTP);
 app.post("/verifyOTP",verifyOTP);
@@ -42,7 +42,7 @@ app.use((req, res, next) => {
 
   mongoose
   .connect(
-     `mongodb+srv://${process.env.DB_user_name}:${process.env.DB_password}@subhamdb.ubqol0o.mongodb.net/test?retryWrites=true&w=majority&appName=SubhamDB`
+     `mongodb+srv://${process.env.DB_username}:${process.env.DB_pass}@subhamdb.ubqol0o.mongodb.net/IntelliDoc?retryWrites=true&w=majority&appName=SubhamDB`
   )
   .then(() => {
     console.log("Server Running");

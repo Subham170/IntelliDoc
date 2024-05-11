@@ -1,6 +1,4 @@
 import nodemailer from "nodemailer";
-import { config } from "dotenv";
-config();
 
 
 export async function sendEmail(to, subject, text) {
@@ -9,13 +7,13 @@ export async function sendEmail(to, subject, text) {
      port: 587,
      secure: false,
       auth: {
-        user: process.env.NODEMAILER_Username, // your email
-        pass: process.env.NODEMAILER_pass // your email password
+        user: 'teamintellidoc@gmail.com', // your email
+        pass: 'kkpr aeiv slyu tlya' // your email password
       }
     });
   
     const mailOptions = {
-      from: process.env.NODEMAILER_Username, // your email
+      from: 'teamintellidoc@gmail.com', // your email
       to: to,
       subject: subject,
       html: text
