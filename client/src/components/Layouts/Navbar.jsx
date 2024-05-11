@@ -1,8 +1,9 @@
 import React, { useContext, useState } from 'react';
 import { BookOpenIcon, Bars3BottomRightIcon, XMarkIcon } from '@heroicons/react/24/solid'
 import './nav.css';
-import { Link, useLocation, useNavigate } from 'react-router-dom';
+import { Link, NavLink, useLocation, useNavigate } from 'react-router-dom';
 import { Context } from '../..';
+import NavLinks from './NavLinks';
 import axios from 'axios';
 import toast from 'react-hot-toast';
 import { BASE_URL } from '../../Base_url';
@@ -39,7 +40,7 @@ function Navbar() {
 
   return (
     <>
-    {location.pathname === '/login' || location.pathname === '/signup' || location.pathname === '/medibuddy' ?<></>:
+    {location.pathname === '/login' || location.pathname === '/signup' || location.pathname === '/medibuddy' || location.pathname === '/user-profile' ?<></>:
     <div className='bg-white shadow-md w-full h-auto fixed top-0 left-0 z-10'>
         <div className='shadow-md w-full fixed top-0 left-0 z-10 bg-white'>
            <div className='md:flex items-center justify-between py-4 md:px-10 px-7 bg-white'>
@@ -72,10 +73,10 @@ function Navbar() {
                {seeProfile&&isAuthorized?<ul className='text-sm text-start flex-col 
                   line leading-6 block mt-3 lg:top-20 lg:right-0 lg:hidden'>
                <li>
-               <Link className= '  text-gray-800 hover:text-blue-600 duration-500 hover:underline font-bold mb-4 text-lg' to='/profile' onClick={()=>setOpen(false)}>Profile</Link>
+               <Link className= '  text-gray-800 hover:text-blue-600 duration-500 hover:underline font-bold mb-4 text-lg' to='/user-profile' onClick={()=>setOpen(false)}>Profile</Link>
                </li>
                <li>
-               <Link className= '  hover:text-blue-600 duration-500 hover:underline font-bold mb-4 text-lg' to='/Dashboard' onClick={()=>setOpen(false)}>Dashboard</Link>
+               <Link className= '  hover:text-blue-600 duration-500 hover:underline font-bold mb-4 text-lg' to='/user-profile' onClick={()=>setOpen(false)}>Dashboard</Link>
                </li>
                <li><button className='btn mt-3 bg-blue-600 text-white md: font-semibold px-3 py-1  
                duration-500 md:static rounded-full' onClick={handleLogout} >Logout</button>
@@ -89,10 +90,10 @@ function Navbar() {
         </div>
         {seeProfile&&isAuthorized?<ul className='text-sm text-start flex-col absolute top-56 z-10  bg-white line leading-6 hidden px-3 lg:top-20 right-0 lg:block'>
                <li>
-               <Link className= '  text-gray-800 hover:text-blue-600 hover:underline duration-500 font-bold mb-4 text-lg' to='/profile' onClick={()=>setOpen(false)}>Profile</Link>
+               <Link className= '  text-gray-800 hover:text-blue-600 hover:underline duration-500 font-bold mb-4 text-lg' to='/user-profile' onClick={()=>setOpen(false)}>Profile</Link>
                </li>
                <li>
-               <Link className= '  text-gray-800 hover:text-blue-600 hover:underline duration-500 font-bold mb-4 text-lg' to='/Dashboard' onClick={()=>setOpen(false)}>Dashboard</Link>
+               <Link className= '  text-gray-800 hover:text-blue-600 hover:underline duration-500 font-bold mb-4 text-lg' to='/user-profile' onClick={()=>setOpen(false)}>Dashboard</Link>
                </li>
                <li><button className='btn bg-blue-600 text-white md: font-semibold px-3 py-1 duration-500 md:static rounded-full' onClick={handleLogout}>Logout</button>
                </li>
