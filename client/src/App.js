@@ -1,21 +1,20 @@
 import './App.css';
-import {BrowserRouter as Router, Routes, Route} from 'react-router-dom';
-import Navbar from './components/Layouts/Navbar.jsx';
+import {BrowserRouter as Router, Routes, Route, useNavigate, Form, useLocation} from 'react-router-dom';
+import Navbar from './components/Layouts/Navbar';
 import Login from './components/Auth/Login';
-// import Register from './components/Auth/Register';
-import Footer from './components/Layouts/Footer.jsx';
+import Footer from './components/Layouts/Footer';
 import Home from './components/Home/Home';
 import NotFound from './components/NotFound/NotFound';
 import { useContext, useEffect } from 'react';
 import { Context } from '.';
 import toast,{Toaster} from 'react-hot-toast';
 import axios from 'axios';
+import Diagnosis from "./components/Diagnosis/Diagnosis"
+import Medibuddy from './components/MediBuddy/Main/Medibuddy.jsx';
 import { BASE_URL } from './Base_url.js';
-
 function App() {
-
   const {isAuthorized,setIsAuthorized,user,setUser}=useContext(Context);
-
+  const location = window.location;
   const getUser = async () => {
     try {
       if(location.pathname==='/medibuddy'){
@@ -48,6 +47,8 @@ function App() {
     <Routes>
       <Route path='/' element={<Home />} />
       <Route path='/login' element={<Login />} />
+      <Route path='/diagnosis' element={<Diagnosis />} />
+      <Route path='/medibuddy' element={<Medibuddy />} />
    <Route path='*' element={<NotFound />} />
     </Routes>
     <Footer />

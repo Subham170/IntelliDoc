@@ -6,6 +6,12 @@ import axios from 'axios';
 import { Context } from '../..';
 import { BASE_URL } from '../../Base_url';
 function Login() {
+
+  
+  // const {isAuthorized,setIsAuthorized,user,setUser}=useContext(Context);
+  // const {isAuthorized,setIsAuthorized,user,setUser}=useContext(Context);
+
+
   const [isSignUp, setIsSignUp] = useState(false);
   const [formData, setFormData] = useState({
     name: '',
@@ -40,7 +46,9 @@ const navigateTo = useNavigate();
         },});
       console.log(response.data);
       toast.success(response.data.message);
+      // setIsAuthorized(true);
       navigateTo('/')
+
     } catch (error) {
       console.error(error.response.data);
       toast.error(error.response.data.message);
@@ -60,11 +68,11 @@ const navigateTo = useNavigate();
       });
       console.log(response.data);
       toast.success(response.data.message);
+      // setIsAuthorized(true);
       navigateTo('/');
     } catch (error) {
       console.error(error.response.data);
       toast.error(error.response.data.message);
-      // Handle error, display error message
     }
   };
 
@@ -80,7 +88,7 @@ const navigateTo = useNavigate();
             <input type="password" placeholder="Password" name="password" onChange={handleChange} />
             <button type='submit'>Sign Up</button>
           </form>
-        </div>
+        </div> 
         <div className="form-container sign-in">
           <form onSubmit={handleSubmit}>
             <h1>Sign In</h1>
@@ -101,7 +109,6 @@ const navigateTo = useNavigate();
             <div className="toggle-panel toggle-right">
             <h1>Welcome Back!</h1>
               <p>Enter your personal details to use all site features</p>
-              
               <button className="bg-blue-600" onClick={toggleForm}>Sign Up</button>
             </div>
           </div>

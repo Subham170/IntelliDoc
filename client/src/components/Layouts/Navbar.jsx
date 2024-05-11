@@ -14,8 +14,7 @@ function Navbar() {
     const location = useLocation();
     let Links =[
         {name:"Home",link:"/"},
-        {name:"Diagnosis",link:"/diagnosis"},
-        {name:"",link:"/contact"},
+        {name:"Diagnosis",link:"/diagnosis"}
       ];
       let [open, setOpen] =useState(false);
   let username
