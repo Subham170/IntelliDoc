@@ -3,6 +3,8 @@ import {BrowserRouter as Router, Routes, Route, useNavigate, Form, useLocation} 
 import Navbar from './components/Layouts/Navbar';
 import Login from './components/Auth/Login';
 import Register from './components/Auth/Register';
+import ForgotPassword from './components/Auth/ForgotPassword.jsx';
+import ChangePassword from './components/Auth/ChangePassword.jsx';
 import Footer from './components/Layouts/Footer';
 import Home from './components/Home/Home';
 import NotFound from './components/NotFound/NotFound';
@@ -23,6 +25,17 @@ import Blood_Test from '../src/components/Form/BloodTest.jsx';
 import Kidney_Stone from '../src/components/Form/Kidney_Stone.jsx';
 import Medibuddy from './components/MediBuddy/Main/Medibuddy.jsx';
 import { BASE_URL } from './Base_url.js';
+import BloodTestResults from './components/Results/BloodTestResults.jsx';
+import HeartDiseaseResults from './components/Results/HeartDiseaseResult.jsx';
+import Cardio_disease_Results from './components/Results/CardioDiseaseResults.jsx';
+import DiabetesResults from './components/Results/DiabetesResults.jsx';
+import KidneyStoneResults from './components/Results/KidneyStoneResults.jsx';
+import UserProfile from './components/Dashboard/Dashboard.jsx';
+import LiverDiseaseResult from './components/Results/LiverDiseaseResult.jsx';
+import CataractResult from './components/Results/Img-result/CataractResult.jsx';
+import CTScanResult from './components/Results/Img-result/CT_scanResult.jsx';
+import DiabeticRetinopathyResult from './components/Results/Img-result/DiabeticretinopathyResult.jsx';
+import SkinDiseaseResult from './components/Results/Img-result/SkinDiseaseResult.jsx';
 function App() {
 
   const {isAuthorized,setIsAuthorized,user,setUser}=useContext(Context);
@@ -44,7 +57,6 @@ function App() {
       toast.success(error.response.data.message);
       setIsAuthorized(false);
       console.error('Error fetching user data:', error);
-
     }
   };
   
@@ -62,6 +74,8 @@ function App() {
       <Route path='/' element={<Home />} />
       <Route path='/login' element={<Login />} />
       <Route path='/signup' element={<Register />} />
+      <Route path='/forgotPassword' element={<ForgotPassword />} />
+      <Route path='/changePassword' element={<ChangePassword />} />
       <Route path='/diagnosis' element={<Diagnosis />} />
       <Route path='/diabetes' element={<DiabetesForm />} />
       <Route path='/heart-disease' element={<HeartDiseaseForm />} />
@@ -73,6 +87,16 @@ function App() {
       <Route path='/skin-disease' element={<SkinDiseaseForm />} />
       <Route path='/ct-scan' element={<Ct_scan_form />} />
       <Route path='/diabetic-retinopathy' element={<DiabeticRetinopathyForm />} />
+     <Route path='/bloodtest/:id' element={<BloodTestResults />} />
+     <Route path='/heart-disease-results/:id' element={<HeartDiseaseResults />} />
+     <Route path='/cardio-disease-results/:id' element={<Cardio_disease_Results />} />
+     <Route path='/diabetes-results/:id' element={<DiabetesResults />} />
+     <Route path='/kidney-stone-results/:id' element={<KidneyStoneResults />} />
+     <Route path='/liver-disease-results/:id' element={<LiverDiseaseResult />} />
+     <Route path='/cataract-results/:id' element={<CataractResult />} />
+     <Route path='/ct-scan-results/:id' element={<CTScanResult />} />
+     <Route path='/diabetic-retinopathy-results/:id' element={<DiabeticRetinopathyResult />} />
+     <Route path='/skin-disease-results/:id' element={<SkinDiseaseResult />} />
       <Route path='/medibuddy' element={<Medibuddy />} />
       <Route path='/user-profile' element={<UserProfile />} />
    <Route path='*' element={<NotFound />} />

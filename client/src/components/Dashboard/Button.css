@@ -1,0 +1,35 @@
+.evaluated-button {
+    border: none;
+    color: white;
+    padding: 12px 24px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+  
+  .evaluated {
+    background-color: #4CAF50; 
+  }
+  
+  .not-evaluated {
+    background-color: #FF5733;
+  }
+  
+  .evaluated-button:hover {
+    filter: brightness(90%);
+  }
+  
+  .tick-mark {
+    margin-left: 5px;
+    font-size: 18px;
+  }
+  
+  .cross-mark {
+    margin-left: 5px;
+    font-size: 18px;
+  }
+  

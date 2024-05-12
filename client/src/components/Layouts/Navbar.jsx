@@ -5,6 +5,7 @@ import { Link, NavLink, useLocation, useNavigate } from 'react-router-dom';
 import { Context } from '../..';
 import NavLinks from './NavLinks';
 import axios from 'axios';
+import logo from '../../assests/mainlogo.png';
 import toast from 'react-hot-toast';
 import { BASE_URL } from '../../Base_url';
 function Navbar() {
@@ -20,7 +21,7 @@ function Navbar() {
       let [open, setOpen] =useState(false);
   let username
   if(isAuthorized){
-  username = user.name.toUpperCase()[0];
+  username = user.name[0].toUpperCase();
   }
 
   const handleLogout = async () => {
@@ -40,13 +41,14 @@ function Navbar() {
 
   return (
     <>
-    {location.pathname === '/login' || location.pathname === '/signup' || location.pathname === '/medibuddy' || location.pathname === '/user-profile' ?<></>:
+    {location.pathname === '/login' || location.pathname === '/signup' || location.pathname === '/medibuddy' || location.pathname === '/user-profile' || location.pathname === '/changePassword' ||
+    location.pathname === '/forgotPassword' ?<></>:
     <div className='bg-white shadow-md w-full h-auto fixed top-0 left-0 z-10'>
         <div className='shadow-md w-full fixed top-0 left-0 z-10 bg-white'>
            <div className='md:flex items-center justify-between py-4 md:px-10 px-7 bg-white'>
             {/* logo section */}
             <div className='font-bold text-2xl cursor-pointer flex items-center gap-1'>
-               <Link to={'/'} className='flex items-center'> <BookOpenIcon className='w-7 h-7 text-blue-600'/>
+               <Link to={'/'} className='flex items-center'> <img src={logo} className='w-7 h-7 text-blue-600'/>
                 <span>IntelliDoc</span>
                 </Link>
             </div>

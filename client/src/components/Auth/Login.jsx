@@ -1,15 +1,14 @@
 import React, { useContext, useState } from 'react';
 import './style.css'; 
-import { Navigate, useNavigate } from 'react-router-dom';
+import { Link, Navigate, useNavigate } from 'react-router-dom';
 import toast from 'react-hot-toast';
 import axios from 'axios';
 import { Context } from '../..';
 import { BASE_URL } from '../../Base_url';
 function Login() {
 
-  
-  // const {isAuthorized,setIsAuthorized,user,setUser}=useContext(Context);
-  // const {isAuthorized,setIsAuthorized,user,setUser}=useContext(Context);
+
+  const {isAuthorized,setIsAuthorized,user,setUser}=useContext(Context);
 
 
   const [isSignUp, setIsSignUp] = useState(false);
@@ -44,15 +43,14 @@ const navigateTo = useNavigate();
         headers: {
           "Content-Type": "application/json",
         },});
-      console.log(response.data);
+      console.log("response kdj",response);
+      setUser(response.data.user);
+      setIsAuthorized(true);
       toast.success(response.data.message);
-      // setIsAuthorized(true);
       navigateTo('/')
-
     } catch (error) {
       console.error(error.response.data);
       toast.error(error.response.data.message);
-      // Handle error, display error message
     }
   };
 
@@ -64,15 +62,15 @@ const navigateTo = useNavigate();
         headers: {
           "Content-Type": "application/json",
         },
-
       });
       console.log(response.data);
+      setUser(response.data.user);
+      setIsAuthorized(true);
       toast.success(response.data.message);
-      // setIsAuthorized(true);
       navigateTo('/');
     } catch (error) {
       console.error(error.response.data);
-      toast.error(error.response.data.message);
+      toast.error(error.response.message);
     }
   };
 
@@ -88,14 +86,14 @@ const navigateTo = useNavigate();
             <input type="password" placeholder="Password" name="password" onChange={handleChange} />
             <button type='submit'>Sign Up</button>
           </form>
-        </div> 
+        </div>
         <div className="form-container sign-in">
           <form onSubmit={handleSubmit}>
             <h1>Sign In</h1>
             <span>or use your email password</span>
             <input type="email" placeholder="Email" name="email" onChange={handleChange2} />
             <input type="password" placeholder="Password" name="password" onChange={handleChange2} />
-            <a href="#">Forget Your Password?</a>
+            <Link to={'/forgotPassword'}>Forget Your Password?</Link>
             <button type='submit'>Sign In</button>
           </form>
         </div>
@@ -109,6 +107,7 @@ const navigateTo = useNavigate();
             <div className="toggle-panel toggle-right">
             <h1>Welcome Back!</h1>
               <p>Enter your personal details to use all site features</p>
+              
               <button className="bg-blue-600" onClick={toggleForm}>Sign Up</button>
             </div>
           </div>
