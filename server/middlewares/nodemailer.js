@@ -1,5 +1,6 @@
 import nodemailer from "nodemailer";
-
+import {config} from "dotenv";
+config();
 
 export async function sendEmail(to, subject, text) {
     const transporter = nodemailer.createTransport({
@@ -7,13 +8,13 @@ export async function sendEmail(to, subject, text) {
      port: 587,
      secure: false,
       auth: {
-        user: 'teamintellidoc@gmail.com', // your email
-        pass: 'kkpr aeiv slyu tlya' // your email password
+        user: process.env.your_Email, // your email
+        pass:  process.env.app_pass// your email password
       }
     });
   
     const mailOptions = {
-      from: 'teamintellidoc@gmail.com', // your email
+      from: process.env.your_Email, // your email
       to: to,
       subject: subject,
       html: text

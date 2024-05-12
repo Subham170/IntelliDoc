@@ -8,7 +8,7 @@ import pkg from "body-parser";
 import HttpError from "../models/http-error.js";
 import { User } from "../models/user.js";
 import { sendEmail } from "../middlewares/nodemailer.js";
-
+import { Profile } from "../models/profile.js";
 
 
 
@@ -161,7 +161,7 @@ export const login = async(req,res,next)=>{
     );
     return next(error);
   }
-
+  res.cookie('jwt',token,{httpOnly:true, maxAge:3600000});
   res.json({
     success:true,
     message:"logging in successful",
@@ -179,32 +179,6 @@ export const logout = async (req, res) => {
   }
 
 
-  // POST route to handle forgot password request
 
-  
-  // Function to send email
-  // async function sendEmail(to, subject, text) {
-  //   const transporter = nodemailer.createTransport({
-  //     service: 'gmail',
-  //     auth: {
-  //       user: 'teamintellidoc@gmail.com', // your email
-  //       pass: 'kkpr aeiv slyu tlya' // your email password
-  //     }
-  //   });
-  
-  //   const mailOptions = {
-  //     from: 'teamintellidoc@gmail.com', // your email
-  //     to: to,
-  //     subject: subject,
-  //     text: text
-  //   };
-     
-  //   try{
-  //     await transporter.sendMail(mailOptions);
-  //   } catch(err){
-  //      console.log(err);
-  //   }
-    
-  // }
 
   
