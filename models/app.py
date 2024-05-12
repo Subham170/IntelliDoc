@@ -8,8 +8,57 @@ import tensorflow as tf
 import cv2
 import numpy as np
 import json
+from sklearn.feature_extraction.text import TfidfVectorizer
+from sklearn.metrics.pairwise import cosine_similarity
+
 app = Flask(__name__)
-CORS(app, supports_credentials=True)  # Enable CORS with support for credentials
+CORS(app)  # Enable CORS for all routes
+
+# app = Flask(__name__)
+# CORS(app, supports_credentials=True)  # Enable CORS with support for credentials
+
+#Medicine Recommendation
+
+tfidf = joblib.load('medicine_recommend.pkl')
+clean_df = pd.read_csv('Medicine_Details.csv')  # Update with your clean dataframe
+tfidf_matrix_uses = tfidf.fit_transform(clean_df['Uses'])
+
+# Define the recommendation function
+def recommend_medicines_by_symptoms(symptoms, tfidf_vectorizer, tfidf_matrix_uses, clean_df):
+    symptom_str = ' '.join(symptoms)
+    symptom_vector = tfidf_vectorizer.transform([symptom_str])
+    sim_scores = cosine_similarity(tfidf_matrix_uses, symptom_vector)
+    sim_scores = sim_scores.flatten()
+    similar_indices = sim_scores.argsort()[::-1][:10] 
+    recommended_medicines = clean_df.iloc[similar_indices]
+    return recommended_medicines
+
+# Define the route to handle POST requests
+@app.route('/recommend_medicines', methods=['POST'])
+def recommend_medicines():
+    data = request.json
+    symptoms = data['symptoms']
+    recommended_medicines_df = recommend_medicines_by_symptoms(symptoms, tfidf, tfidf_matrix_uses, clean_df)
+    
+    # Extract necessary details from the recommended medicines dataframe
+    recommended_medicines = []
+    for _, row in recommended_medicines_df.iterrows():
+        medicine_details = {
+            'Medicine Name': row['Medicine Name'],
+            'Composition': row['Composition'],
+            'Uses': row['Uses'],
+            'Side_effects': row['Side_effects'],
+            'Image URL': row['Image URL'],
+            'Manufacturer': row['Manufacturer'],
+            'Excellent Review %': row['Excellent Review %'],
+            'Average Review %': row['Average Review %'],
+            'Poor Review %': row['Poor Review %']
+        }
+        recommended_medicines.append(medicine_details)
+    
+    return jsonify({'recommended_medicines': recommended_medicines})
+
+
 
 # Load Model and Load Column Names for heart disease prediction
 col_names = joblib.load("heart_disease_columns.pkl")
