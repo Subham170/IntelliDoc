@@ -5,7 +5,7 @@ import { Context } from '../..';
 const CardList = ({ tests }) => {
   const {user, setUser,isAuthorized,setIsAuthorized}=useContext(Context);
   return (
-    <div className='flex flex-wrap justify-evenly gap-y-5  mx-7'>
+    <div className='flex flex-wrap justify-start gap-x-8 gap-y-5 lg:gap-x-12  gap-y-5  mx-7 ml-11'>
       {tests.map((user, i) => (
         <Card 
           key={i} 
@@ -13,7 +13,7 @@ const CardList = ({ tests }) => {
           name={user.name} 
           img={user.img}
           description={user.description}
-          path={isAuthorized?user.path:'/login'}
+          path={isAuthorized?user.path:'/diagnosis'}
         />
       ))}
     </div>

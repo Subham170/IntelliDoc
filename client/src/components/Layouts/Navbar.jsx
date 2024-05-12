@@ -8,6 +8,8 @@ import axios from 'axios';
 import logo from '../../assests/mainlogo.png';
 import toast from 'react-hot-toast';
 import { BASE_URL } from '../../Base_url';
+import { FaAngleDown } from 'react-icons/fa';
+import {motion} from 'framer-motion';
 function Navbar() {
     const navigateTo=useNavigate();
     const [seeProfile,setSeeProfile]=useState(false);
@@ -16,7 +18,8 @@ function Navbar() {
     const location = useLocation();
     let Links =[
         {name:"Home",link:"/"},
-        {name:"Diagnosis",link:"/diagnosis"}
+        {name:"Diagnosis",link:"/diagnosis"},
+        {name:"Medicines",link:"/medicines"},
       ];
       let [open, setOpen] =useState(false);
   let username
@@ -69,10 +72,12 @@ function Navbar() {
                     ))
                 }
                {!isAuthorized? <button className='btn bg-blue-600 text-white md:ml-8 font-semibold px-3 py-1 rounded duration-500 md:static' onClick={()=>navigateTo('/login')}>Get Started</button>:
-                <button className='btn bg-blue-600 text-white md:ml-8 font-semibold px-3 py-1 rounded duration-500 md:static rounded-full' onClick={()=>setSeeProfile(!seeProfile)}>{username}</button>
+               <button className='btn bg-blue-600 text-white md:ml-8 font-semibold px-3 py-1 rounded duration-500 md:static rounded-full flex items-center justify-between'  onClick={()=>setSeeProfile(!seeProfile)}>  <span >  {username}</span> <FaAngleDown /></button>
                }
 
-               {seeProfile&&isAuthorized?<ul className='text-sm text-start flex-col 
+               {seeProfile&&isAuthorized?<motion.ul initial={{opacity:0}} animate={{opacity:1}}
+               transition={{duration:0.5}}
+                className='text-sm text-start flex-col 
                   line leading-6 block mt-3 lg:top-20 lg:right-0 lg:hidden'>
                <li>
                <Link className= '  text-gray-800 hover:text-blue-600 duration-500 hover:underline font-bold mb-4 text-lg' to='/user-profile' onClick={()=>setOpen(false)}>Profile</Link>
@@ -83,7 +88,7 @@ function Navbar() {
                <li><button className='btn mt-3 bg-blue-600 text-white md: font-semibold px-3 py-1  
                duration-500 md:static rounded-full' onClick={handleLogout} >Logout</button>
                </li>
-               </ul>:<></>}
+               </motion.ul>:<></>}
             </ul>
             
             {/* button */}

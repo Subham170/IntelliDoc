@@ -36,6 +36,7 @@ import CataractResult from './components/Results/Img-result/CataractResult.jsx';
 import CTScanResult from './components/Results/Img-result/CT_scanResult.jsx';
 import DiabeticRetinopathyResult from './components/Results/Img-result/DiabeticretinopathyResult.jsx';
 import SkinDiseaseResult from './components/Results/Img-result/SkinDiseaseResult.jsx';
+import RecommendationPage from './components/RecommendationPage/RecommendPage.jsx';
 function App() {
 
   const {isAuthorized,setIsAuthorized,user,setUser}=useContext(Context);
@@ -52,6 +53,7 @@ function App() {
       setUser(response.data.user);
       setIsAuthorized(true);
       toast.success(response.data.message);
+      
      
     } catch (error) {
       toast.success(error.response.data.message);
@@ -98,6 +100,7 @@ function App() {
      <Route path='/diabetic-retinopathy-results/:id' element={<DiabeticRetinopathyResult />} />
      <Route path='/skin-disease-results/:id' element={<SkinDiseaseResult />} />
       <Route path='/medibuddy' element={<Medibuddy />} />
+      <Route path='/medicines' element={<RecommendationPage />} />
       <Route path='/user-profile' element={<UserProfile />} />
    <Route path='*' element={<NotFound />} />
     </Routes>
