@@ -18,6 +18,10 @@ export const submitFeedback = async(req,res)=>{
       <p>Team IntelliDoc</p>`;
 
     sendEmail(email, "Feedback submission!", msg);
+
+    res.json({success:true,
+        message:"Feedback submitted successfully!"
+    });
   };
 
   export const getProfile = async(req,res)=>{
